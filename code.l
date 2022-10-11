@@ -3,6 +3,7 @@
   #include <string.h> // para poder usar a string no linux
   #include "code.tab.h"  // para obter os tipos de token do bison
 %}
+%option noyywrap
 RECEBE "="
 %%
 [ \t\n]           ;
