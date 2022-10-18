@@ -322,6 +322,9 @@ void yyfree ( void *  );
 #define YY_AT_BOL() (YY_CURRENT_BUFFER_LVALUE->yy_at_bol)
 
 /* Begin user sect3 */
+
+#define yywrap() (/*CONSTCOND*/1)
+#define YY_SKIP_YYWRAP
 typedef flex_uint8_t YY_CHAR;
 
 FILE *yyin = NULL, *yyout = NULL;
@@ -446,8 +449,8 @@ char *yytext;
   #include <cstdio>
   #include <string.h> // para poder usar a string no linux
   #include "code.tab.h"  // para obter os tipos de token do bison
-#line 449 "lex.yy.c"
-#line 450 "lex.yy.c"
+#line 452 "lex.yy.c"
+#line 453 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -664,9 +667,9 @@ YY_DECL
 		}
 
 	{
-#line 7 "code.l"
+#line 8 "code.l"
 
-#line 669 "lex.yy.c"
+#line 672 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -726,35 +729,35 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 8 "code.l"
+#line 9 "code.l"
 ;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 9 "code.l"
+#line 10 "code.l"
 { yylval.fval = atof(yytext); return FLOAT; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 10 "code.l"
+#line 11 "code.l"
 { yylval.ival = atoi(yytext); return INT; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 11 "code.l"
+#line 12 "code.l"
 { yylval.sval = strdup(yytext); return VAR; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 12 "code.l"
+#line 13 "code.l"
 {yylval.sval = strdup(yytext); return RECEBE;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 13 "code.l"
+#line 14 "code.l"
 ECHO;
 	YY_BREAK
-#line 757 "lex.yy.c"
+#line 760 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1759,6 +1762,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 13 "code.l"
+#line 14 "code.l"
 
 

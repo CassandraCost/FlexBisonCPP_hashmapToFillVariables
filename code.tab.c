@@ -428,18 +428,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  5
+#define YYFINAL  7
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   5
+#define YYLAST   9
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  7
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  4
+#define YYNRULES  7
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  8
+#define YYNSTATES  10
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   261
@@ -489,7 +489,7 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    29,    29,    30,    38
+       0,    29,    29,    30,    34,    35,    36,    38
 };
 #endif
 
@@ -525,7 +525,7 @@ static const yytype_int16 yytoknum[] =
 };
 #endif
 
-#define YYPACT_NINF (-5)
+#define YYPACT_NINF (-6)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -539,7 +539,7 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -4,    -3,     0,    -5,    -2,    -5,    -5,    -5
+       3,    -6,    -6,    -5,     0,    -6,    -2,    -6,    -6,    -6
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -547,19 +547,19 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     3,     0,     1,     2,     4
+       0,     4,     5,     6,     0,     3,     0,     1,     2,     7
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -5,    -5,     2
+      -6,    -6,     5
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2,     3
+      -1,     4,     5
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -567,31 +567,31 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       5,     1,     7,     4,     6,     1
+       7,     6,     9,     1,     2,     3,     1,     2,     3,     8
 };
 
 static const yytype_int8 yycheck[] =
 {
-       0,     5,     4,     6,     2,     5
+       0,     6,     4,     3,     4,     5,     3,     4,     5,     4
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     5,     8,     9,     6,     0,     9,     4
+       0,     3,     4,     5,     8,     9,     6,     0,     9,     4
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,     7,     8,     8,     9
+       0,     7,     8,     8,     9,     9,     9,     9
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     2,     1,     3
+       0,     2,     2,     1,     1,     1,     1,     3
 };
 
 
@@ -1058,23 +1058,42 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 4: /* comandos: VAR RECEBE FLOAT  */
+  case 4: /* comandos: INT  */
+#line 34 "code.y"
+      { cout << "Int: " << (yyvsp[0].ival) << endl;}
+#line 1065 "code.tab.c"
+    break;
+
+  case 5: /* comandos: FLOAT  */
+#line 35 "code.y"
+          { cout << "Float: " << (yyvsp[0].fval) << endl;}
+#line 1071 "code.tab.c"
+    break;
+
+  case 6: /* comandos: VAR  */
+#line 36 "code.y"
+        { cout << "Variavel: " << (yyvsp[0].sval) << endl;}
+#line 1077 "code.tab.c"
+    break;
+
+  case 7: /* comandos: VAR RECEBE FLOAT  */
 #line 38 "code.y"
-                       { 
+                     { 
       //verificar se existe,se existir eu atualizo.
       if(variaveis.find((yyvsp[-2].sval)) != variaveis.end()){
-          cout << (variaveis.find((yyvsp[-2].sval))->second) << endl;
+          variaveis.find((yyvsp[-2].sval))->second = (yyvsp[0].fval);
+          cout << "Valor: " << variaveis.find((yyvsp[-2].sval))->second << endl;
       }else{
           variaveis.insert({(yyvsp[-2].sval),(yyvsp[0].fval)});
           cout << "Valor: " << variaveis.find((yyvsp[-2].sval))->second << endl;
       }
-      cout << "bison NNNN: " << (yyvsp[-2].sval) << (yyvsp[-1].sval)<< (yyvsp[0].fval) << endl;
+      cout << "Bison variavel recebe: " << (yyvsp[-2].sval) << (yyvsp[-1].sval)<< (yyvsp[0].fval) << endl;
     }
-#line 1074 "code.tab.c"
+#line 1093 "code.tab.c"
     break;
 
 
-#line 1078 "code.tab.c"
+#line 1097 "code.tab.c"
 
       default: break;
     }
@@ -1268,7 +1287,7 @@ yyreturn:
   return yyresult;
 }
 
-#line 50 "code.y"
+#line 51 "code.y"
 
 
 int main(int, char**) {

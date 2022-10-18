@@ -31,19 +31,20 @@ cod: cod comandos
   ;
 
 comandos:
-  /* INT { cout << "bison found an int: " << $1 << endl;}
-  | FLOAT { cout << "bison found a float: " << $1 << endl;}
-  | VAR { cout << "bison found a variavel: " << $1 << endl;}
-  | RECEBE { cout << "bison found a REC: " << $1 << endl;}
-  |*/ VAR RECEBE FLOAT { 
+  INT { cout << "Int: " << $1 << endl;}
+  | FLOAT { cout << "Float: " << $1 << endl;}
+  | VAR { cout << "Variavel: " << $1 << endl;}
+  //| RECEBE { cout << "bison found a REC: " << $1 << endl;}
+  | VAR RECEBE FLOAT { 
       //verificar se existe,se existir eu atualizo.
       if(variaveis.find($1) != variaveis.end()){
-          cout << (variaveis.find($1)->second) << endl;
+          variaveis.find($1)->second = $3;
+          cout << "Valor: " << variaveis.find($1)->second << endl;
       }else{
           variaveis.insert({$1,$3});
           cout << "Valor: " << variaveis.find($1)->second << endl;
       }
-      cout << "bison NNNN: " << $1 << $2<< $3 << endl;
+      cout << "Bison variavel recebe: " << $1 << $2<< $3 << endl;
     }
   ; 
 
